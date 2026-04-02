@@ -1,0 +1,1 @@
+S'ha utilitzat IA ChatGPT. Ha servit per ajudar a organitzar el frontend amb "flex" i divisions. La resta ens ha permés entendre millor el codi i ajudar en un problema el qual no s'enviava la llista de 'nuevo_usuario' al backend. Per la resta amb les classes i videos proposats pel professor ha permés entendre la funcionalitat del socket.io.
