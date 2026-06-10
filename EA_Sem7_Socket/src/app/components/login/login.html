@@ -1,0 +1,64 @@
+<div class="login-container">
+  <div class="login-box">
+    <div class="brand">
+      <div class="logo">💬</div>
+      <h1>Seminario Chat</h1>
+      <p>Entra o regístrate para empezar a chatear en tiempo real.</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      
+      <div class="form-group" *ngIf="errorMessage">
+        <div class="error-alert">{{ errorMessage }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="nombreOrg">Nombre de la Organización</label>
+        <input 
+          type="text" 
+          id="nombreOrg" 
+          name="nombreOrg" 
+          [(ngModel)]="nombreOrg" 
+          placeholder="Ej: Universidad EA" 
+          required 
+          autocomplete="organization"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Tu Nombre</label>
+        <input 
+          type="text" 
+          id="nombre" 
+          name="nombre" 
+          [(ngModel)]="nombre" 
+          placeholder="Ej: Marc" 
+          required 
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Tú Correo</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          [(ngModel)]="email" 
+          placeholder="Ej: marc@gmail.com" 
+          required 
+          autocomplete="email"
+        />
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Entrar al Chat</span>
+        <span *ngIf="isLoading">Cargando...</span>
+      </button>
+
+      <p class="disclaimer">
+        *Este registro es rápido para pruebas. Creará la organización y el usuario automáticamente en MongoDB.
+      </p>
+    </form>
+  </div>
+</div>

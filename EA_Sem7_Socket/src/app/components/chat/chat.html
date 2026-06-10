@@ -1,0 +1,95 @@
+<div class="chat-wrapper">
+
+  <!-- HEADER -->
+  <header class="chat-header">
+    <div class="header-info">
+      <h2>Organización: {{ organizacionActivaName }}</h2>
+
+      <div class="header-bottom">
+        <span class="status-indicator">En línea</span>
+
+        @if (typingUser) {
+          <span class="typing-indicator">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            {{ typingUser }}
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="user-badge">
+      Usuario: {{ usuarioActivoName }}
+    </div>
+  </header>
+
+ 
+  <div class="chat-body">
+
+    <!-- CHAT -->
+    <div class="chat-messages" id="chat-messages">
+      <div class="message-list">
+
+        @for (mensaje of mensajes; track mensaje._id) {
+          <div 
+            class="message-bubble" 
+            [ngClass]="{
+              'message-mine': esMensajeMio(mensaje), 
+              'message-other': !esMensajeMio(mensaje)
+            }"
+          >
+            <div class="message-sender" *ngIf="!esMensajeMio(mensaje)">
+              {{ getUsuarioName(mensaje.usuario) }}
+            </div>
+
+            <div class="message-content">
+              {{ mensaje.contenido }}
+            </div>
+          </div>
+        } @empty {
+          <div class="empty-state">
+            No hay mensajes todavía. ¡Escribe algo para empezar el chat!
+          </div>
+        }
+
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="users-sidebar">
+      <h3>Usuaris connectats</h3>
+
+      <ul>
+        @for (user of usuarios; track user) {
+          <li>{{ user }}</li>
+        }
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="chat-footer">
+    <form (ngSubmit)="enviarMensaje()" class="input-form">
+      <input 
+        type="text" 
+        [(ngModel)]="nuevoMensaje" 
+        name="mensajeInput" 
+        placeholder="Escribe su mensaje aquí..." 
+        autocomplete="off"
+        class="message-input"
+        (input)="onTyping()"
+        required
+      />
+
+      <button type="submit" class="send-button" [disabled]="!nuevoMensaje.trim()">
+        Enviar
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </form>
+  </footer>
+
+</div>
